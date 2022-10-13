@@ -1,4 +1,4 @@
-#opção01: !pip install pytube
+#opção01: pip install pytube
 #opção02: pip install --upgrade youtube-dl
 #pip install ffmpeg-python
 import traceback
@@ -8,7 +8,7 @@ import easygui
 import ffmpeg
 import os
 
-url_video = "https://www.youtube.com/watch?v=UddrdePhbfM"
+url_video = "https://www.youtube.com/watch?v=c7-8B-_C4kM"
 #url_video = input("Informe a url do video: ")
 
 try:
@@ -29,8 +29,8 @@ try:
     for indice in range(len(lst_adaptiveFormats)):
         dict_adaptiveFormats_indice = lst_adaptiveFormats[indice]
         for chave in dict_adaptiveFormats_indice:
-            qualidade = dict_adaptiveFormats_indice[chave]
             if chave == 'height':
+                qualidade = dict_adaptiveFormats_indice[chave]
                 if qualidade not in lst_qualidade:
                     lst_qualidade.append(qualidade)
 
@@ -43,24 +43,30 @@ try:
         print("Programa finalizado!")
     else:
         indice_resolucao = qualidade_selecionada-1
+        # OBS: verificar depois a questão dos arquivos 4k (mkv)
         print("Fazendo download do video...")
-        yt.streams.filter(resolution=str(lst_qualidade[indice_resolucao]) + "p",
-                          file_extension="mp4").first().download(diretorio+"/temp",
-                                                                 filename=f"{titulo_video}_video.mp4")
+        # yt.streams.filter(resolution=str(lst_qualidade[indice_resolucao])+"p",
+        #                   file_extension="mp4").first().download(diretorio+"/temp",
+        #                                                          filename=f"{titulo_video}_video.mp4")
+        yt.streams.filter(resolution=str(lst_qualidade[indice_resolucao]) + "p").first().download(diretorio + "/temp",
+                                                                                                  filename=f"{titulo_video}_video.mkv")
+
+        print(str(lst_qualidade[indice_resolucao]) + "p")
 
         print("Fazendo download do audio...")
         indice_audio = yt.streams.filter(only_audio=True).get_audio_only().itag
         yt.streams.get_by_itag(indice_audio).download(diretorio+"/temp",
-                                                      filename=f"{titulo_video}_audio.mp4")
+                                                      filename=f"{titulo_video}_audio.mkv")
 
         print("Fazendo a junção do video e do audio...")
-        video_YT = ffmpeg.input(f"{diretorio}/temp/{titulo_video}_video.mp4")
-        audio_YT = ffmpeg.input(f"{diretorio}/temp/{titulo_video}_audio.mp4")
+        video_YT = ffmpeg.input(f"{diretorio}/temp/{titulo_video}_video.mkv")
+        audio_YT = ffmpeg.input(f"{diretorio}/temp/{titulo_video}_audio.mkv")
         ffmpeg.output(video_YT,
                       audio_YT,
-                      f'{diretorio}/{titulo_video}.mp4').run()
-        remover_video = f"{diretorio}/temp/{titulo_video}_video.mp4"
-        remover_audio = f"{diretorio}/temp/{titulo_video}_audio.mp4"
+                      f'{diretorio}/{titulo_video}.mkv').run() # converte para o formato escolhido
+
+        remover_video = f"{diretorio}/temp/{titulo_video}_video.mkv"
+        remover_audio = f"{diretorio}/temp/{titulo_video}_audio.mkv"
         remover_temp = f"{diretorio}/temp/"
         os.remove(remover_video)
         os.remove(remover_audio)
