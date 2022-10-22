@@ -8,8 +8,8 @@ import easygui
 import ffmpeg
 import os
 
-url_video = "https://www.youtube.com/watch?v=c7-8B-_C4kM"
-#url_video = input("Informe a url do video: ")
+# url_video = "https://www.youtube.com/watch?v=c7-8B-_C4kM"
+url_video = input("Informe a url do video: ")
 
 try:
     yt = YouTube(url_video)
@@ -74,3 +74,4 @@ try:
         print("Concluído!")
 except Exception as ex:
     print(f"ERRO!\n {ex}")
+#%%

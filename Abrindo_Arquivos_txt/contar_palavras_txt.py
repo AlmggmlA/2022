@@ -20,5 +20,4 @@ def conta_palavras(frase):
         dicionario[palavra] += 1
 
     return dicionario
-
 print(conta_palavras(texto))
