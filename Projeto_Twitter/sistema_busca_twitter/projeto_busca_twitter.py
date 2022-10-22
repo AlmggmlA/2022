@@ -212,7 +212,9 @@ def dct_busca_twt_assunto():
 def salvar(flag_opcao_entrada):
 
     # chama a função flag_opcao_entrada para identificar as buscas a serem salvas
+    contador = 0
     for opcao in flag_opcao_entrada:
+        contador+=1
         # SALVAR pesquisa por data
         if opcao == 1:
             dict_twitter = dct_busca_twt_data()
@@ -270,7 +272,10 @@ def salvar(flag_opcao_entrada):
                                           lineterminator='\n')
                 escrever_csv.writerows(tbl_resultado_assunto)
 
-    print("Arquivo salvo com sucesso!")
+    if contador == 0:
+        print("Não existe busca realizada.")
+    else:
+        print("Arquivo salvo com sucesso!")
 
 
                               ############################################################
