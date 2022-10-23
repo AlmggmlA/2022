@@ -324,8 +324,7 @@ def salvar(flag_opcao_entrada):
                 print("FILTRO POR ASSUNTO: gravando arquivo...")
                 arquivo_salvo.append(True)
                 dict_mensagem.update({'assunto': {True: mensagem_data}})
-        # else:
-        #     print("Não existem arquivos a serem salvos!")
+
 
     cont_false = 0
     cont_arquivo_salvo = 0
