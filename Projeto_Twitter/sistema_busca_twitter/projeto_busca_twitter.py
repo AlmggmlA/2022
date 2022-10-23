@@ -1,7 +1,7 @@
 import csv
 import json
+from datetime import datetime,date
 from colorama import Fore, Style
-
 
 # FUNÇÃO PARA ABRIR ARQUIVO
 def abrir_arquivo():
@@ -66,6 +66,17 @@ tbl_resultado_data = []
 qtd_data = 0
 
 # TABELA DO RESULTADO DA CONSULTA POR data
+
+#FUNÇÃO PARA VALIDAR DATA RECEBIDA
+def validaData(data_recebida):
+    formato = '%d/%m/%Y'
+    try:
+        validar_data_recebida = date.strftime(datetime.strptime(data_recebida, formato), formato)
+        return True
+    except ValueError:
+        print("Formato de data inválido! O padrão é dia/mês/ano")
+        return False
+
 def busca_twt_data():
     '''
     Realiza a pesquisa dos assuntos por data.
@@ -77,25 +88,36 @@ def busca_twt_data():
     global qtd_data
 
     data_recebida = input("Informe a data que deseja pesquisar (dd/mm/aaaa): ")
+    validacao_data = validaData(data_recebida)
+    while validacao_data == False:
+        data_recebida = input("Informe a data que deseja pesquisar (dd/mm/aaaa): ")
+        validacao_data = validaData(data_recebida)
 
-    # TABELA DATA
-    tbl_resultado_data.append(dict_geral_twitter[1]['titulo'])
-    qtd_data = sum([qtd_data + 1
-                    for indice in range(1, len(dict_geral_twitter) + 1)
-                    if data_recebida in dict_geral_twitter[indice][f'data_{indice}']])
+    if validacao_data == True:
 
-    if qtd_data != 0:
-        [
-            tbl_resultado_data.append([dict_geral_twitter[indice][f'data_{indice}'],
-                                       dict_geral_twitter[indice][f'conteudo_{indice}'],
-                                       dict_geral_twitter[indice][f'assunto_{indice}']])
-                                       for indice in range(1, len(dict_geral_twitter) + 1)
-                                       if data_recebida in dict_geral_twitter[indice][f'data_{indice}']
-        ]
-        # Chama a função que apresenta o resultada da busca na tela do usuário.
-        apresentar_resultado_data(tbl_resultado_data, qtd_data, data_recebida)
-    else:
-        print(f"\nA sua pesquisa retornou: {Fore.LIGHTGREEN_EX}{qtd_data}{Style.RESET_ALL} resultado(s) para a data {Fore.LIGHTGREEN_EX}{data_recebida}{Style.RESET_ALL}")
+        # TABELA DATA
+        tbl_resultado_data.append(dict_geral_twitter[1]['titulo'])
+        qtd_data = sum([qtd_data + 1
+                        for indice in range(1, len(dict_geral_twitter) + 1)
+                        if data_recebida in dict_geral_twitter[indice][f'data_{indice}']])
+
+        if qtd_data != 0:
+            [
+                tbl_resultado_data.append([dict_geral_twitter[indice][f'data_{indice}'],
+                                           dict_geral_twitter[indice][f'conteudo_{indice}'],
+                                           dict_geral_twitter[indice][f'assunto_{indice}']])
+                                           for indice in range(1, len(dict_geral_twitter) + 1)
+                                           if data_recebida in dict_geral_twitter[indice][f'data_{indice}']
+            ]
+            # Chama a função que apresenta o resultada da busca na tela do usuário.
+            apresentar_resultado_data(tbl_resultado_data, qtd_data, data_recebida)
+        else:
+            print(f"\nA sua pesquisa retornou: {Fore.LIGHTGREEN_EX}{qtd_data}{Style.RESET_ALL} resultado(s) para a data {Fore.LIGHTGREEN_EX}{data_recebida}{Style.RESET_ALL}")
+
+
+
+
+
 
 # DICIONÁRIO DO RESULTADO DA CONSULTA POR data
 def dct_busca_twt_data():

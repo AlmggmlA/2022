@@ -1,7 +1,6 @@
 from display_sistema import tela_sistema as tela
 from sistema_busca_twitter import projeto_busca_twitter as proj_twt
 
-
 def verificarDigito(opcao_entrada):
     while not opcao_entrada.isdigit():
         print("Informe um valor numérico entre 1 e 5")
@@ -16,6 +15,7 @@ if __name__ == '__main__':
     tela.tela_inicial()
     opcao_entrada = input('Informe uma opção: ')
     entrada_usuario = verificarDigito(opcao_entrada)
+
     while rodar_programa:
 
         if entrada_usuario != '5' and entrada_usuario != '4':
