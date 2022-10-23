@@ -71,7 +71,7 @@ qtd_data = 0
 def validaData(data_recebida):
     formato = '%d/%m/%Y'
     try:
-        validar_data_recebida = date.strftime(datetime.strptime(data_recebida, formato), formato)
+        date.strftime(datetime.strptime(data_recebida, formato), formato)
         return True
     except ValueError:
         print("Formato de data inválido! O padrão é dia/mês/ano")
@@ -113,10 +113,6 @@ def busca_twt_data():
             apresentar_resultado_data(tbl_resultado_data, qtd_data, data_recebida)
         else:
             print(f"\nA sua pesquisa retornou: {Fore.LIGHTGREEN_EX}{qtd_data}{Style.RESET_ALL} resultado(s) para a data {Fore.LIGHTGREEN_EX}{data_recebida}{Style.RESET_ALL}")
-
-
-
-
 
 
 # DICIONÁRIO DO RESULTADO DA CONSULTA POR data
@@ -328,6 +324,8 @@ def salvar(flag_opcao_entrada):
                 print("FILTRO POR ASSUNTO: gravando arquivo...")
                 arquivo_salvo.append(True)
                 dict_mensagem.update({'assunto': {True: mensagem_data}})
+        # else:
+        #     print("Não existem arquivos a serem salvos!")
 
     cont_false = 0
     cont_arquivo_salvo = 0
@@ -366,6 +364,7 @@ def salvar(flag_opcao_entrada):
 
     if contador_busca == 0:
         print("Não existe busca realizada.")
+        print("Não existem arquivos a serem salvos!")
     else:
         if cont_arquivo_salvo != 0:
             print("Arquivo(s) salvo(s) com sucesso!")

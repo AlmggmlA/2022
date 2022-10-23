@@ -11,6 +11,7 @@ def verificarDigito(opcao_entrada):
 if __name__ == '__main__':
     rodar_programa = True
     flag_opcao_entrada = []
+    lst_opcao_entrada = [1,2,3,4,5]
 
     tela.tela_inicial()
     opcao_entrada = input('Informe uma opção: ')
@@ -19,7 +20,7 @@ if __name__ == '__main__':
     while rodar_programa:
 
         if entrada_usuario != '5' and entrada_usuario != '4':
-            if int(entrada_usuario) not in flag_opcao_entrada:
+            if int(entrada_usuario) not in flag_opcao_entrada and int(entrada_usuario) in lst_opcao_entrada:
                 flag_opcao_entrada.append(int(entrada_usuario))
 
         if entrada_usuario == '1':
@@ -54,4 +55,8 @@ if __name__ == '__main__':
             tela.tela_sair()
             print("Programa finalizado...")
             rodar_programa = False
+        else:
+            print("Informe um valor numérico entre 1 e 5")
+            opcao_entrada = input('Informe uma opção: ')
+            entrada_usuario = verificarDigito(opcao_entrada)
 
