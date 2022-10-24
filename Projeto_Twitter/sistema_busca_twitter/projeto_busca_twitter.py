@@ -60,13 +60,6 @@ def info_twitter():
 
 dict_geral_twitter = info_twitter()
 
-# PESQUISA POR DATA
-data_recebida = ""
-tbl_resultado_data = []
-qtd_data = 0
-
-# TABELA DO RESULTADO DA CONSULTA POR data
-
 #FUNÇÃO PARA VALIDAR DATA RECEBIDA
 def validaData(data_recebida):
     formato = '%d/%m/%Y'
@@ -77,6 +70,10 @@ def validaData(data_recebida):
         print("Formato de data inválido! O padrão é dia/mês/ano")
         return False
 
+# PESQUISA POR DATA
+data_recebida = ""
+tbl_resultado_data = []
+qtd_data = 0
 def busca_twt_data():
     '''
     Realiza a pesquisa dos assuntos por data.
@@ -89,10 +86,12 @@ def busca_twt_data():
 
     data_recebida = input("Informe a data que deseja pesquisar (dd/mm/aaaa): ")
     validacao_data = validaData(data_recebida)
+
     while validacao_data == False:
         data_recebida = input("Informe a data que deseja pesquisar (dd/mm/aaaa): ")
         validacao_data = validaData(data_recebida)
 
+    # TABELA DO RESULTADO DA CONSULTA POR data
     if validacao_data == True:
 
         # TABELA DATA
