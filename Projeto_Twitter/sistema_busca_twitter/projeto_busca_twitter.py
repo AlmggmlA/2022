@@ -60,7 +60,7 @@ def info_twitter():
 
 dict_geral_twitter = info_twitter() # recebe um dicionário com todas as informações da base de dados
 
-#FUNÇÃO PARA VALIDAR DATA RECEBIDA
+# FUNÇÃO PARA VALIDAR DATA RECEBIDA
 def validaData(data_recebida):
     formato = '%d/%m/%Y'
     try:
