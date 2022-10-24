@@ -58,7 +58,7 @@ def info_twitter():
 #####################################           FUNÇÕES DE PESQUISA DO SISTEMA          ################################
                                     #####################################################
 
-dict_geral_twitter = info_twitter()
+dict_geral_twitter = info_twitter() # recebe um dicionário com todas as informações da base de dados
 
 #FUNÇÃO PARA VALIDAR DATA RECEBIDA
 def validaData(data_recebida):
