@@ -1,0 +1,27 @@
+apache hive
+artificial intelligence
+big data
+computational vision
+computer vision
+data analysis
+data analyst
+data analytics
+data science
+deep learning
+git
+github
+hadoop
+machine learning
+matplotlib
+natural language processing
+nlp
+numpy
+pandas
+power bi
+pyspark
+python
+scikit-learn
+seaborn
+spark
+statistical
+yaml
